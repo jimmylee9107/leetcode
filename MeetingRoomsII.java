@@ -21,7 +21,7 @@ class MeetingRoomsII {
 		if (intervals == null || intervals.length == 0) {
 			return 0;
 		}
-
+		
 		int res = 0;
 		List<Point> points = new LinkedList<>();
 		for (Interval interval : intervals) {
