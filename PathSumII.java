@@ -30,7 +30,7 @@ class PathSumII {
 			return;
 		}
 		path.add(root.val);
-		if (root.left == null || root.right == null) {
+		if (root.left == null && root.right == null) {
 
 			if (sum == root.val) {
 				res.add(new LinkedList<>(path));
