@@ -18,5 +18,50 @@
 // The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how a graph is represented.
 
 class CourseScheduleII {
-	
+	public int[] findOrder(int numCourses, int[][] prerequisites) {
+		if (numCourses == 0) {
+			return new int[0];
+		}
+
+		List<Integer>[] graph = new List[numCourses]; 
+		int[] indegree = new int[numCourses];
+
+		for (int i = 0; i < prerequisites.length; i++) {
+			int course = prerequisites[i][0];
+			int prerequisite = prerequisites[i][1];
+			indegree[course]++;
+			List<Integer> courses = graph[prerequisite];
+			if (courses == null) {
+				courses = new LinkedList<Integer>();
+				graph[prerequisite] = courses;
+			}
+			courses.add(course);
+		}
+
+		int[] order = new int[numCourses];
+		Queue<Integer> queue = new LinkedList<>();
+		for (int i = 0; i < numCourses; i++) {
+			if (indegree[i] == 0) {
+				queue.offer(i);
+			}
+		}
+
+		int count = 0;
+		int index = 0;
+		while(!queue.isEmpty()) {
+			int course = queue.poll();
+			order[index++] = course;
+			count++;
+			List<Integer> temp = graph[course];
+			if (temp != null && temp.size() > 0) {
+				for (int id : temp) {
+					indegree[id]--;
+					if (indegree[id] == 0) {
+						queue.offer(id);
+					}
+				}
+			}
+		}
+		return count == numCourses ? order : new int[0];
+    }
 }
