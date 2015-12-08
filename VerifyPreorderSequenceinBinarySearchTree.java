@@ -11,6 +11,18 @@ class VerifyPreorderSequenceinBinarySearchTree {
 			return true;
 		}
 
-		
+		int index = -1;
+		int low = Integer.MIN_VALUE;
+		for (int p : preorder) {
+			if (low > p) {
+				return false;
+			}
+
+			while(index >= 0 && preorder[index] < p) {
+				low = preorder[index--];
+			}
+			preorder[++index] = p;
+		}
+		return true;
     }
 }
