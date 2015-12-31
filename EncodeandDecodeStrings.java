@@ -21,7 +21,6 @@
 
 class EncodeandDecodeStrings {
 	// Encodes a list of strings to a single string.
-	// /escape 
     public String encode(List<String> strs) {
     	if (strs == null || strs.size() == 0) {
     		return "";
